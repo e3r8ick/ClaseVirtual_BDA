@@ -1,8 +1,14 @@
 //require
-var express = require("express");
-var bodyParser = require("body-parser");
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/RentACar";
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+//const
+var url = "mongodb://localhost:27017/";
+var DB = "RentACar";
+
 
 //server
 var app = express()
@@ -11,119 +17,45 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 //host
-var server = app.listen(3000, function(){
+var server = app.listen(3003, function(){
   var host = server.address().address;
   var port = server.address().port;
 
   console.log("App escuchando en http://%s:%s",host,port);
 })
 
-MongoClient.connect(url,{ useNewUrlParser: true }, function(err, db) {
-  if (err) throw err;
-  console.log("Database created!");
-  db.close();
-});
+const findDocuments = function(db, callback) {
+    // Get the documents collection
+    const collection = db.collection('estilo');
+    // Find some documents
+    collection.find({}).toArray(function(err, docs) {
+      assert.equal(err, null);
+      console.log("Found the following records");
+      console.log(docs)
+      callback(docs);
+    });
+  };
 
 
-//////////////////////////////////SCHEMAS///////////////////////////////////////////
+function connect(){
+    const client = new MongoClient(url,{ useNewUrlParser: true });
+    // Use connect method to connect to the server
+    client.connect(function(err) {
+    assert.equal(null, err);
+    console.log("Connected correctly to server");
 
-var challengesSchema = new mongoose.Schema({
-  type: String,
-  sport: String,
-  teamA: String,
-  teamB: String
-})
-
-
-var newsSchema = new mongoose.Schema({
-  type: String,
-  title: String,
-  subtitle: String,
-  sport: String
-})
-
-var teamsSchema = new mongoose.Schema({
-  type: String,
-  name: String,
-  picture: String,
-  members: Array
-})
-
-var resultSchema = new mongoose.Schema({
-  type: String,
-  typeResult: String,
-  info: String,
-  url: String
-})
-
-var sportsSchema = new mongoose.Schema({
-  type: String,
-  name: String,
-  picture: String
-}) 
-
-//////////////////////////////////MODELS///////////////////////////////////////////
-
-var userModel = mongoose.model("user", {
-  type: String,
-  name: String,
-  email: String,
-  hash: String
-})
-
-var challengesModel =mongoose.model("challenge", {
-  type: String,
-  sport: String,
-  teamA: String,
-  teamB: String
-})
-
-
-var newsModel = mongoose.model("new", {
-  type: String,
-  title: String,
-  subtitle: String,
-  sport: String
-})
-
-var teamsModel = mongoose.model("team", {
-  type: String,
-  name: String,
-  picture: String,
-  members: Array
-})
-
-var resultsModel = mongoose.model("result", {
-  type: String,
-  typeResult: String,
-  info: String,
-  url: String
-})
-
-var sportsModel = mongoose.model("sport", {
-  type: String,
-  name: String,
-  picture: String
-})
-
-
+    return client.db(DB);
+    });
+}
 ///////////////////////////////////CRUD/////////////////////////////////////////////
 
-buildUserApi(app);
+//buildUserApi(app);
 
 //get del usuario segun su email
-app.get("/user", function(req,res,next){
-  var userEmail = req.query.email;
-  if(req.query.email){
-      var user = mongoose.model('users', userSchema);
-      user.find({ 'email': userEmail}, function (err, users) {
-          if (err) return handleError(err);
-          res.send(JSON.stringify(users))
-      })
-  }
-  else{
-      res.send(JSON.stringify("[{Empty email}]"))
-  }
+app.get("/vehiculo", function(req,res,next){
+    var con = connect();
+    findDocuments(con, function() {
+    });
 });
 
 //update del usuario segun su id
