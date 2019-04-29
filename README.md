@@ -1,5 +1,4 @@
 ClaseVirtual_BDA
 
 
-//initialize mongo
--> sudo service mongod start
+https://github.com/e3r8ick/ClaseVirtual_BDA.git
