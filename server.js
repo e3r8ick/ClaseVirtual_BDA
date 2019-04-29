@@ -44,9 +44,86 @@ function connect(){
     assert.equal(null, err);
     console.log("Connected correctly to server");
 
-    return client.db(DB);
-    });
-}
+/* var challengesSchema = new mongoose.Schema({
+  type: String,
+  sport: String,
+  teamA: String,
+  teamB: String
+})
+
+
+var newsSchema = new mongoose.Schema({
+  type: String,
+  title: String,
+  subtitle: String,
+  sport: String
+})
+
+var teamsSchema = new mongoose.Schema({
+  type: String,
+  name: String,
+  picture: String,
+  members: Array
+})
+
+var resultSchema = new mongoose.Schema({
+  type: String,
+  typeResult: String,
+  info: String,
+  url: String
+})
+
+var sportsSchema = new mongoose.Schema({
+  type: String,
+  name: String,
+  picture: String
+}) 
+ */
+//////////////////////////////////MODELS///////////////////////////////////////////
+
+/* var userModel = mongoose.model("user", {
+  type: String,
+  name: String,
+  email: String,
+  hash: String
+})
+
+var challengesModel =mongoose.model("challenge", {
+  type: String,
+  sport: String,
+  teamA: String,
+  teamB: String
+})
+
+
+var newsModel = mongoose.model("new", {
+  type: String,
+  title: String,
+  subtitle: String,
+  sport: String
+})
+
+var teamsModel = mongoose.model("team", {
+  type: String,
+  name: String,
+  picture: String,
+  members: Array
+})
+
+var resultsModel = mongoose.model("result", {
+  type: String,
+  typeResult: String,
+  info: String,
+  url: String
+})
+
+var sportsModel = mongoose.model("sport", {
+  type: String,
+  name: String,
+  picture: String
+}) */
+
+
 ///////////////////////////////////CRUD/////////////////////////////////////////////
 
 //buildUserApi(app);

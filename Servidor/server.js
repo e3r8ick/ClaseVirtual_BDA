@@ -114,7 +114,7 @@ app.get("/vehiculos", function(req,res,next){
 
 
 //get vehiculo por placa
-app.get("/vehiculo", function(req,res,next){
+app.get("/vehiculo/placa", function(req,res,next){
     var placa = req.query.placa;
     if(placa){
         var vehiculo = mongoose.model('vehicle', vehicleSchema);
@@ -127,6 +127,69 @@ app.get("/vehiculo", function(req,res,next){
         res.send(JSON.stringify("[{ID Vacío}]"))
     }
 });
+
+//get vehiculo por rango
+app.get("/vehiculo/rango", function(req,res,next){
+  var rango1 = req.query.rango1;
+  var rango2 = req.query.rango2;
+  if(rango1){
+      var vehiculo = mongoose.model('vehicle', vehicleSchema);
+      vehiculo.find({'precio_dia': { $range: [rango1, rango2] }}, function (err, vehiculos) {
+          if (err) return handleError(err);
+          res.send(JSON.stringify(vehiculos))
+      })
+  }
+  else{
+      res.send(JSON.stringify("[{ID Vacío}]"))
+  }
+});
+
+//get vehiculo por marca
+app.get("/vehiculo/marca", function(req,res,next){
+  var marca = req.query.marca;
+  if(marca){
+      var vehiculo = mongoose.model('vehicle', vehicleSchema);
+      vehiculo.find({'marca': marca}, function (err, vehiculos) {
+          if (err) return handleError(err);
+          res.send(JSON.stringify(vehiculos))
+      })
+  }
+  else{
+      res.send(JSON.stringify("[{ID Vacío}]"))
+  }
+});
+
+//get vehiculo por modelo
+app.get("/vehiculo/modelo", function(req,res,next){
+  var modelo = req.query.modelo;
+  if(modelo){
+      var vehiculo = mongoose.model('vehicle', vehicleSchema);
+      vehiculo.find({'modelo': modelo}, function (err, vehiculos) {
+          if (err) return handleError(err);
+          res.send(JSON.stringify(vehiculos))
+      })
+  }
+  else{
+      res.send(JSON.stringify("[{ID Vacío}]"))
+  }
+});
+
+
+//get vehiculo por modelo
+app.get("/vehiculo/top", function(req,res,next){
+  var modelo = req.query.modelo;
+  if(modelo){
+      var vehiculo = mongoose.model('vehicle', vehicleSchema);
+      vehiculo.find({'modelo': modelo}, function (err, vehiculos) {
+          if (err) return handleError(err);
+          res.send(JSON.stringify(vehiculos))
+      })
+  }
+  else{
+      res.send(JSON.stringify("[{ID Vacío}]"))
+  }
+});
+
 
 
 //crea un vehiculo

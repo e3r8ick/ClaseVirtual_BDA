@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="css/grid.css">
+
+
+<form method="post" action="index.html">
+<div class="box">
+    
+<div id="assetReg" onclick="window.location.href='index.html'" class="btn">Volver</div> <!-- End Btn -->
+
+<h1>Vehiculo placa</h1>
+
+<div class="column">
+  <div class="grid-item">
+      <h4>Placa</h4>
+      <input type="text" id="placa" placeholder="Placa" class="user" />
+  </div>
+  <div class="grid-item">
+    <div id="getVehiculo" onclick="getVehiculo()" type="submit" class="btn">Enter</div> <!-- End Btn -->
+  </div>
+</div>
+
+  
+</div> <!-- End Box -->
+  
+</form>
+
+<script>
+
+    //login
+    function getVehiculo(){
+        var placa = $('#placa').val();
+        $.post( "http://localhost:3002/vehiculo/placa", 
+        { 
+            placa: placa,
+        },
+        function(data){
+        alert(JSON.stringify(data));
+        },"json");
+
+    }
+
+</script>
+  
