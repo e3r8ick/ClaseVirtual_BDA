@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/grid.css">
 
 
-<form method="post" action="index.html">
 <div class="box">
     
 <div id="assetReg" onclick="window.location.href='index.html'" class="btn">Volver</div> <!-- End Btn -->
@@ -24,14 +24,13 @@
   
 </div> <!-- End Box -->
   
-</form>
 
 <script>
 
     //login
     function getVehiculo(){
         var placa = $('#placa').val();
-        $.post( "http://localhost:3002/vehiculo/placa", 
+        $.get( "http://localhost:3002/vehiculo/placa", 
         { 
             placa: placa,
         },

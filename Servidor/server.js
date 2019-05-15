@@ -42,7 +42,7 @@ var vehicleSchema = new mongoose.Schema({
   transmision: String,
   año: String,
   extras: Array,
-  precio_dia: Number,
+  precioDia: Number,
   estado: String
 })
 
@@ -66,7 +66,7 @@ var estiloSchema = new mongoose.Schema({
 })
 
 //////////////////////////////////MODELS///////////////////////////////////////////
-
+/* 
 var vehicleModel = mongoose.model("vehicle", {
     placa: String,
     capacidad: Number,
@@ -79,9 +79,9 @@ var vehicleModel = mongoose.model("vehicle", {
     transmision: String,
     año: String,
     extras: Array,
-    precio_dia: Number,
+    precioDia: Number,
     estado: String
-  })
+  }) */
 
   var rentaModel = mongoose.model("renta", {
     placa: String,
@@ -134,7 +134,7 @@ app.get("/vehiculo/rango", function(req,res,next){
   var rango2 = req.query.rango2;
   if(rango1){
       var vehiculo = mongoose.model('vehicle', vehicleSchema);
-      vehiculo.find({'precio_dia': { $range: [rango1, rango2] }}, function (err, vehiculos) {
+      vehiculo.find({'precioDia': { "$gt": rango1, "$lte": rango2}}, function (err, vehiculos) {
           if (err) return handleError(err);
           res.send(JSON.stringify(vehiculos))
       })
@@ -149,7 +149,7 @@ app.get("/vehiculo/marca", function(req,res,next){
   var marca = req.query.marca;
   if(marca){
       var vehiculo = mongoose.model('vehicle', vehicleSchema);
-      vehiculo.find({'marca': marca}, function (err, vehiculos) {
+      vehiculo.find({'idMarca': marca}, function (err, vehiculos) {
           if (err) return handleError(err);
           res.send(JSON.stringify(vehiculos))
       })

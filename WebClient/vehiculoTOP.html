@@ -2,6 +2,7 @@
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="css/grid.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 
 <form method="post" action="index.html">
@@ -13,7 +14,7 @@
 
 <div class="column">
   <div class="grid-item">
-      <h4>M.arca</h4>
+      <h4>Marca</h4>
       <input type="text" id="marca" placeholder="Marca" class="user" />
   </div>
   <div class="grid-item">
@@ -31,9 +32,9 @@
     //login
     function getVehiculo(){
         var marca = $('#marca').val();
-        $.post( "http://localhost:3002/vehiculo/top", 
+        $.get( "http://localhost:3002/vehiculo/top", 
         { 
-            marca: marca,
+            modelo: marca,
         },
         function(data){
         alert(JSON.stringify(data));

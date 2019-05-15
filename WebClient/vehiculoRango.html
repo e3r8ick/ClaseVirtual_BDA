@@ -2,6 +2,7 @@
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="css/grid.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 
 <form method="post" action="index.html">
@@ -36,7 +37,7 @@
     function getVehiculo(){
         var rango1 = $('#rango1').val();
         var rango2 = $('#rango2').val();
-        $.post( "http://localhost:3002/vehiculo/rango", 
+        $.get( "http://localhost:3002/vehiculo/rango", 
         { 
           rango1: rango1,
           rango2: rango2,
